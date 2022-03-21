@@ -65,10 +65,11 @@ public class Account_Book {
 				date.add(sc.next());
 				System.out.print("금액: ");
 				money.add(sc.nextInt());
+				sc.nextLine();  // nextLine을 쓰기위해 사용
 				System.out.print("수입/지출: ");
-				type.add(sc.next());
+				type.add(sc.nextLine());
 				System.out.print("상세: ");
-				memo.add(sc.next());
+				memo.add(sc.nextLine());
 				break;
 			case(5):
 				System.exit(0);
