@@ -35,9 +35,10 @@ public class Account_Book {
 		final int Display_Level = 5;  // 한 페이지에 최대 5개 목록 출력
 		
 		int show = 0;  // 출력될 데이터의 인덱스
+		int delete; // 삭제될 데이터의 인덱스
 		while(true) {
 			System.out.println("==============================================================");
-			System.out.println("1.내용 추가 | 2.수입 | 3.지출 | 5.종료");
+			System.out.println("1.내용 추가 | 2.수입 | 3.지출 | 4.제거 | 5.종료");
 			System.out.println("==============================================================");
 			
 			System.out.printf("날짜\t\t수입/지출\t\t금액\t\t상세\n");
@@ -70,6 +71,18 @@ public class Account_Book {
 				type.add(sc.nextLine());
 				System.out.print("상세: ");
 				memo.add(sc.nextLine());
+				break;
+			case(4):
+				System.out.print("현재 페이지의 몇 번째 데이터를 제거하시겠습니까?: ");
+				delete = sc.nextInt();
+				if (page == 0)
+					delete -= 1;
+				else
+					delete += 5*page;
+				date.remove(delete);
+				money.remove(delete);
+				type.remove(delete);
+				memo.remove(delete);
 				break;
 			case(5):
 				System.exit(0);
