@@ -10,6 +10,7 @@ public class Account_Book {
 		
 		final int SIZE = 11;  // 배열의 크기를 임시로 정하기 위한 상수
 		
+		/*가계부의 정보들을 저장할 배열들 (동적배열)*/
 		ArrayList<String> date = new ArrayList<String>(SIZE);
 		ArrayList<String> type = new ArrayList<String>(SIZE);
 		ArrayList<String> memo = new ArrayList<String>(SIZE);
