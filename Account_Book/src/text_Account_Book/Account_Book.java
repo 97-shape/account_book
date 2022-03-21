@@ -1,4 +1,5 @@
 package text_Account_Book;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -9,11 +10,17 @@ public class Account_Book {
 		
 		final int SIZE = 11;  // 배열의 크기를 임시로 정하기 위한 상수
 		
-		/*가계부의 정보들을 저장할 배열들*/
+		ArrayList<String> date = new ArrayList<String>(SIZE);
+		ArrayList<String> type = new ArrayList<String>(SIZE);
+		ArrayList<String> memo = new ArrayList<String>(SIZE);
+		ArrayList<Integer> money = new ArrayList<Integer>(SIZE);
+		
+		/*가계부의 정보들을 저장할 배열들
 		String[] date = new String[SIZE];
 		String[] type = new String[SIZE];
 		String[] memo = new String[SIZE];
 		int[] money = new int[SIZE];
+		*/
 		
 		int len = SIZE;  // 배열의 길이
 		
@@ -28,15 +35,13 @@ public class Account_Book {
 		
 		int show = 0;  // 출력될 데이터의 인덱스
 		while(true) {
-			System.out.println(page);
-			
 			System.out.println("==============================================================");
 			System.out.println("1.내용 추가 | 2.수입 | 3.지출 | 5.종료");
 			System.out.println("==============================================================");
 			
-			System.out.printf("날짜\t\t금액\t\t수입/지출\t\t메모\n");
+			System.out.printf("날짜\t\t수입/지출\t\t금액\t\t상세\n");
 			
-			len = date.length;
+			len = date.size();
 			
 			/* 배열의 길이보다 최대 목록이 더 큰가?*/
 			if (len - (page * Display_Level) < Display_Level)
@@ -45,7 +50,7 @@ public class Account_Book {
 				display = 5 * (page+1);
 			
 			for (show = page * 5; show < display; show++) {
-				System.out.printf("%s %s %d %s \n", date[show], type[show], money[show], memo[show]);
+				System.out.printf("%s\t%s\t\t%d\t\t%s \n", date.get(show), type.get(show), money.get(show), memo.get(show));
 			}
 			
 			System.out.println("==============================================================");
@@ -54,6 +59,16 @@ public class Account_Book {
 			flag = sc.nextInt();
 			
 			switch (flag) {
+			case(1):
+				System.out.print("날짜: ");
+				date.add(sc.next());
+				System.out.print("금액: ");
+				money.add(sc.nextInt());
+				System.out.print("수입/지출: ");
+				type.add(sc.next());
+				System.out.print("상세: ");
+				memo.add(sc.next());
+				break;
 			case(5):
 				System.exit(0);
 			case(6):
