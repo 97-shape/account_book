@@ -7,20 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 public class DB {
-	private Connection conn; //DB Ä¿³Ø¼Ç ¿¬°á °´Ã¼
-    private static final String USERNAME = "root";//DBMSÁ¢¼Ó ½Ã ¾ÆÀÌµğ
-    private static final String PASSWORD = "root";//DBMSÁ¢¼Ó ½Ã ºñ¹Ğ¹øÈ£
-    private static final String URL = "jdbc:mysql://localhost:3306/account_book";//DBMSÁ¢¼ÓÇÒ DB¸í
+	private Connection conn; //DB ì»¤ë„¥ì…˜ ì—°ê²° ê°ì²´
+    private static final String USERNAME = "root";//DBMSì ‘ì† ì‹œ ì•„ì´ë””
+    private static final String PASSWORD = "root";//DBMSì ‘ì† ì‹œ ë¹„ë°€ë²ˆí˜¸
+    private static final String URL = "jdbc:mysql://localhost:3306/account_book";//DBMSì ‘ì†í•  DBëª…
     
     public DB() {
         try {
-        	Class.forName("com.mysql.cj.jdbc.Driver");  // forName Á¤¸® : https://limdevbasic.tistory.com/26
-            System.out.println("µå¶óÀÌ¹ö ·Îµå ¼º°ø");
-        } catch (Exception e) {  // Exception °³Ã¼ e »ı¼º
-        	e.printStackTrace();  // ¿À·ù ¿øÀÎ Ãâ·Â
+        	Class.forName("com.mysql.cj.jdbc.Driver");  // forName ì •ë¦¬ : https://limdevbasic.tistory.com/26
+            System.out.println("ë“œë¼ì´ë²„ ë¡œë“œ ì„±ê³µ");
+        } catch (Exception e) {  // Exception ê°œì²´ e ìƒì„±
+        	e.printStackTrace();  // ì˜¤ë¥˜ ì›ì¸ ì¶œë ¥
         }
     }
     
@@ -30,7 +28,7 @@ public class DB {
     		return true;
     	}
     	else {
-    		// System.out.println("ID È¤Àº Password°¡ Æ²·È½À´Ï´Ù.");
+    		// System.out.println("ID í˜¹ì€ Passwordê°€ í‹€ë ¸ìŠµë‹ˆë‹¤.");
     		return false;
     	}
     }
@@ -41,22 +39,22 @@ public class DB {
     	
     	try {
     		conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-    		// System.out.println("·Î±×ÀÎ ¼º°ø");
+    		// System.out.println("ë¡œê·¸ì¸ ì„±ê³µ");
     	} catch (SQLException e) {
-    		System.out.println("·Î±×ÀÎ ½ÇÆĞ(Àß¸øµÈ ÀÔ·Â Á¤º¸)");
+    		System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨(ì˜ëª»ëœ ì…ë ¥ ì •ë³´)");
     	}
     	return conn;
     }
-    /* µ¥ÀÌÅÍ »ğÀÔ */
+    /* ë°ì´í„° ì‚½ì… */
     public static void insertData(String date, String type, String money, String memo){
 		try{
 			Connection con = getConn();
 			
-			/* ¸í·É¾î »ı¼º */
+			/* ëª…ë ¹ì–´ ìƒì„± */
 			String sql = "INSERT INTO account_book (a_date, a_type, money, memo) "
 					+ "VALUES ( ?, ?, ?, ?)";
 			PreparedStatement pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, date);  // PreparedStatement °´Ã¼¸í.setString(? ¼ø¼­, ÀÔ·Â µ¥ÀÌÅÍ)
+				pstmt.setString(1, date);  // PreparedStatement ê°ì²´ëª….setString(? ìˆœì„œ, ì…ë ¥ ë°ì´í„°)
 				pstmt.setString(2, type);
 				pstmt.setString(3, money);
 				pstmt.setString(4, memo);
@@ -67,15 +65,15 @@ public class DB {
 		}
 	}
     
-    /* µ¥ÀÌÅÍ ¼öÁ¤ */
+    /* ë°ì´í„° ìˆ˜ì • */
     public static void updateData(String date, String type, String money, String memo, String id){
 		try{
 			Connection con = getConn();
 			
-			/* ¸í·É¾î »ı¼º */
+			/* ëª…ë ¹ì–´ ìƒì„± */
 			String sql = "UPDATE account_book SET a_date=?, a_type=?, money=?, memo=? WHERE id=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, date);  // PreparedStatement °´Ã¼¸í.setString(? ¼ø¼­, ÀÔ·Â µ¥ÀÌÅÍ)
+				pstmt.setString(1, date);  // PreparedStatement ê°ì²´ëª….setString(? ìˆœì„œ, ì…ë ¥ ë°ì´í„°)
 				pstmt.setString(2, type);
 				pstmt.setString(3, money);
 				pstmt.setString(4, memo);
@@ -87,12 +85,12 @@ public class DB {
 		}
 	}
     
-    /* µ¥ÀÌÅÍ »èÁ¦ */
+    /* ë°ì´í„° ì‚­ì œ */
     public static void deleteData(String id){
 		try{
 			Connection con = getConn();
 			
-			/* ¸í·É¾î »ı¼º */
+			/* ëª…ë ¹ì–´ ìƒì„± */
 			String sql = "DELETE FROM account_book WHERE id=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, id);
@@ -103,11 +101,11 @@ public class DB {
 		}
 	}
     
-    // µ¥ÀÌÅÍ ºÒ·Á¿À±â
+    // ë°ì´í„° ë¶ˆë ¤ì˜¤ê¸°
     public static String[][] getData(String order){
 		try{
 			Connection con = getConn();
-			PreparedStatement statement = con.prepareStatement("Select a_date, a_type, money, memo, id FROM account_book ORDER BY a_date " + order);
+			PreparedStatement statement = con.prepareStatement("Select * FROM account_book ORDER BY a_date " + order);
 			ResultSet results = statement.executeQuery();
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(results.next()){
@@ -129,12 +127,12 @@ public class DB {
 		}
 	}
     
-    // µ¥ÀÌÅÍ ºÒ·¯¿À±â(ÇÊÅÍ)
+    // ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°(í•„í„°)
     
     public static String[][] getDataFilter(String type, String order){
     	try{
 			Connection con = getConn();
-			PreparedStatement statement = con.prepareStatement("Select a_date, a_type, money, memo FROM account_book where a_type= '" + type + "' ORDER BY a_date " + order);
+			PreparedStatement statement = con.prepareStatement("Select * FROM account_book where a_type= '" + type + "' ORDER BY a_date " + order);
 			ResultSet results = statement.executeQuery();
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(results.next()){
@@ -159,7 +157,7 @@ public class DB {
     public static String[][] getSearchData(String type, String order){
     	try{
 			Connection con = getConn();
-			PreparedStatement statement = con.prepareStatement("Select a_date, a_type, money, memo FROM account_book " + type + " ORDER BY a_date " + order);
+			PreparedStatement statement = con.prepareStatement("Select * FROM account_book " + type + " ORDER BY a_date " + order);
 			ResultSet results = statement.executeQuery();
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			while(results.next()){
