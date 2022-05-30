@@ -68,7 +68,7 @@ public class MainFrame {
 		frame.getContentPane().setBackground(new Color(211, 211, 211));
 		frame.setSize(new Dimension(1068, 655));
 		
-		frame.setLocationRelativeTo(null); // Ã³À½ ½ÇÇà À§Ä¡ = È­¸é °¡¿îµ¥
+		frame.setLocationRelativeTo(null); // ì²˜ìŒ ì‹¤í–‰ ìœ„ì¹˜ = í™”ë©´ ê°€ìš´ë°
 		
 		// frame.setJMenuBar(menuBar());
 		
@@ -77,7 +77,7 @@ public class MainFrame {
 		frame.getContentPane().setLayout(null);
 		
 		String[][] data = DB.getData("ASC");
-		String[] header = {"³¯Â¥", "¼öÀÔ/ÁöÃâ", "±İ¾×", "¸Ş¸ğ", "id"};
+		String[] header = {"ë‚ ì§œ", "ìˆ˜ì…/ì§€ì¶œ", "ê¸ˆì•¡", "ë©”ëª¨", "id"};
 		DefaultTableModel model = new DefaultTableModel(data, header);
 		JTable table = new JTable(model);
 		
@@ -88,7 +88,7 @@ public class MainFrame {
 		table.getColumn("id").setMinWidth(0);
 		table.getColumn("id").setMaxWidth(0);
 		
-		/* Å×ÀÌºí Çì´õ ¼³Á¤*/
+		/* í…Œì´ë¸” í—¤ë” ì„¤ì •*/
 		JTableHeader head = table.getTableHeader();
 		head.setBackground(new Color(92,179, 255));
 		head.setForeground(new Color(255,255,255));
@@ -109,14 +109,14 @@ public class MainFrame {
 		
 		table.setPreferredScrollableViewportSize(new Dimension(800, 400));
 		
-		/* °Ë»öÃ¢ */
+		/* ê²€ìƒ‰ì°½ */
 		
 		JComboBox<String> searchType = new JComboBox<String>();
-		searchType.addItem("³¯Â¥");
-		searchType.addItem("¼öÀÔ/ÁöÃâ");
-		searchType.addItem("±İ¾×");
-		searchType.addItem("sql¹®");
-		searchType.setSelectedIndex(0); // ±âº»°ª ÁöÁ¤
+		searchType.addItem("ë‚ ì§œ");
+		searchType.addItem("ìˆ˜ì…/ì§€ì¶œ");
+		searchType.addItem("ê¸ˆì•¡");
+		searchType.addItem("sqlë¬¸");
+		searchType.setSelectedIndex(0); // ê¸°ë³¸ê°’ ì§€ì •
 		searchType.setBounds(12, 247, 90, 23);
 		frame.getContentPane().add(searchType);
 				
@@ -134,11 +134,11 @@ public class MainFrame {
 		frame.getContentPane().add(btnSearch);
 		
 				
-		/* ÀÔ·Â / ¼öÁ¤ */
+		/* ì…ë ¥ / ìˆ˜ì • */
 		
 		JLabel lblDate = new JLabel("\uB0A0\uC9DC");
 		lblDate.setBounds(22, 127, 57, 15);
-		lblDate.setHorizontalAlignment(JLabel.CENTER);  // °¡¿îµ¥ Á¤·Ä
+		lblDate.setHorizontalAlignment(JLabel.CENTER);  // ê°€ìš´ë° ì •ë ¬
 		frame.getContentPane().add(lblDate);
 		
 		inputDate = new JTextField();
@@ -170,8 +170,8 @@ public class MainFrame {
 		typeRadio.add(rdbtnIncome);
 		typeRadio.add(rdbtnOutcome);
 		
-		rdbtnIncome.setActionCommand("¼öÀÔ");
-		rdbtnOutcome.setActionCommand("ÁöÃâ");
+		rdbtnIncome.setActionCommand("ìˆ˜ì…");
+		rdbtnOutcome.setActionCommand("ì§€ì¶œ");
 		
 		JLabel lblMemo = new JLabel("\uBA54\uBAA8");
 		lblMemo.setBounds(587, 114, 57, 15);
@@ -181,7 +181,7 @@ public class MainFrame {
 		inputMemo.setBounds(587, 139, 407, 65);
 		frame.getContentPane().add(inputMemo);
 		
-		/* ¹öÆ° */
+		/* ë²„íŠ¼ */
 		
 		JButton btnInsert = new JButton("\uC0BD\uC785");
 		btnInsert.setBounds(616, 247, 97, 23);
@@ -197,12 +197,12 @@ public class MainFrame {
 		
 		JComboBox<String> showType = new JComboBox<String>();
 		showType.setBounds(943, 247, 97, 23);
-		showType.addItem("ÀüÃ¼");
-		showType.addItem("¼öÀÔ");
-		showType.addItem("ÁöÃâ");
+		showType.addItem("ì „ì²´");
+		showType.addItem("ìˆ˜ì…");
+		showType.addItem("ì§€ì¶œ");
 		frame.getContentPane().add(showType);
 		
-		/* ÀÌº¥Æ® */
+		/* ì´ë²¤íŠ¸ */
 		
 		btnInsert.addActionListener(new ActionListener() {
 			@Override
@@ -214,10 +214,10 @@ public class MainFrame {
 					String memo = inputMemo.getText();
 					
 					DB.insertData(date, type, money, memo);
-					model.addRow(new Object[] {date, type, money, memo});  // Jtable¿¡ °ª Ãß°¡
+					model.addRow(new Object[] {date, type, money, memo});  // Jtableì— ê°’ ì¶”ê°€
 				}catch (Exception e1){
 					new JOptionPane();
-					JOptionPane.showMessageDialog(null, "ÀÔ·Â °ª¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ì…ë ¥ ê°’ì— ì˜¤ë¥˜ê°€ ìˆìŠµë‹ˆë‹¤.", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -240,7 +240,7 @@ public class MainFrame {
 					}
 				}catch (Exception e1){
 					new JOptionPane();
-					JOptionPane.showMessageDialog(null, "ÀÔ·Â °ª¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ì…ë ¥ ê°’ì— ì˜¤ë¥˜ê°€ ìˆìŠµë‹ˆë‹¤.", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -258,7 +258,7 @@ public class MainFrame {
 					}
 				}catch (Exception e1){
 					new JOptionPane();
-					JOptionPane.showMessageDialog(null, "ÀÔ·Â °ª¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ì…ë ¥ ê°’ì— ì˜¤ë¥˜ê°€ ìˆìŠµë‹ˆë‹¤.", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -267,17 +267,16 @@ public class MainFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				model.setNumRows(0);
 				String type = (String) showType.getSelectedItem();
-				if (type == "ÀüÃ¼"){
-					for (int i=0; i<data.length; i++) {
-						model.addRow(data[i]);					
-					}
+				String[][] newData;
+				if (type == "ì „ì²´"){
+					newData = DB.getData((String) orderBox.getSelectedItem());
 				}else {
-					model.setNumRows(0);
-					String[][] newData = DB.getDataFilter(type, (String) orderBox.getSelectedItem());
-					for (int i=0; i<newData.length; i++) {
-						model.addRow(newData[i]);					
-					}
+					newData = DB.getDataFilter(type, (String) orderBox.getSelectedItem());
+				}
+				for (int i=0; i<newData.length; i++) {
+					model.addRow(newData[i]);					
 				}
 			}
 		});
@@ -289,17 +288,17 @@ public class MainFrame {
 				String type = (String) searchType.getSelectedItem();
 				String search = (String) searchField.getText(); 
 				System.out.println(type + " " + search);
-				if (type == "sql¹®") {
+				if (type == "sqlë¬¸") {
 					
 				}else {
 					switch (type) {
-						case "³¯Â¥":
+						case "ë‚ ì§œ":
 							type = "a_date";
 							break;
-						case "¼öÀÔ/ÁöÃâ":
+						case "ìˆ˜ì…/ì§€ì¶œ":
 							type = "a_type";
 							break;
-						case "±İ¾×":
+						case "ê¸ˆì•¡":
 							type = "money";
 							break;
 					}
@@ -307,6 +306,7 @@ public class MainFrame {
 					System.out.println(type + " " + search);
 				}
 				String[][] searchData = DB.getSearchData(search, (String) orderBox.getSelectedItem());
+				System.out.println("a" + searchData.length);
 				model.setNumRows(0);
 				for (int i=0; i<searchData.length; i++) {
 					model.addRow(searchData[i]);					
@@ -319,6 +319,7 @@ public class MainFrame {
 			public void actionPerformed(ActionEvent e) {
 				String order = (String) orderBox.getSelectedItem();
 				String[][] orderData = DB.getData(order);
+				System.out.println("a" + orderData);
 				model.setNumRows(0);
 				for (int i=0; i<orderData.length; i++) {
 					model.addRow(orderData[i]);					
@@ -331,7 +332,7 @@ public class MainFrame {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 		        int row = table.rowAtPoint(evt.getPoint());
 		        inputDate.setText((String) table.getValueAt(row, 0));
-		        if (table.getValueAt(row, 1).equals("¼öÀÔ")) {
+		        if (table.getValueAt(row, 1).equals("ìˆ˜ì…")) {
 		        	rdbtnIncome.setSelected(true);
 		        }else {
 		        	rdbtnOutcome.setSelected(true);
